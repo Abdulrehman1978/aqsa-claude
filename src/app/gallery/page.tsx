@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -84,6 +85,7 @@ export default function GalleryPage() {
         }}>
           {artworks.map((art, i) => (
             <Reveal key={art.title} delay={i * 0.07} direction="scale">
+              <TiltCard maxTilt={12}>
               <article
                 className="card-lift"
                 style={{
@@ -139,6 +141,7 @@ export default function GalleryPage() {
                   <p style={{ fontSize: "0.83rem", color: "var(--muted)", lineHeight: 1.7 }}>{art.desc}</p>
                 </div>
               </article>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
