@@ -1,118 +1,182 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { GalleryCard } from "@/components/shared/GalleryCard";
-import galleryItems from "@/data/gallery_items.json";
+import { Reveal } from "@/components/ui/Reveal";
 
-export const metadata = {
-  title: "Gallery | Aqsa Art & Craft",
-  description: "Browse the curated portfolio of Aqsa's paintings, paper crafts, and DIY projects.",
+export const metadata: Metadata = {
+  title: "Gallery",
+  description: "Browse Aqsa's complete portfolio of watercolor paintings, paper crafts, DIY projects, macramé, and mixed media artwork.",
 };
 
-export default async function GalleryPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string; item?: string }>;
-}) {
-  const params = await searchParams;
-  const currentCategory = params.category || "all";
-  
-  const categories = ["all", ...Array.from(new Set(galleryItems.map((item) => item.category)))];
+const artworks = [
+  { src: "/images/art-1.png", title: "Paper Quilling Mandala", tag: "Paper Craft", desc: "Cream and terracotta paper coils shaped into an intricate mandala. 200+ individual pieces.", year: "2024" },
+  { src: "/images/art-2.png", title: "Gestural Peony Study", tag: "Watercolor", desc: "Loose gestural watercolor on cold press paper. Blush and coral palette.", year: "2024" },
+  { src: "/images/art-3.png", title: "Botanical Resin Tray", tag: "DIY Craft", desc: "Pressed botanicals suspended in crystal-clear resin. Terracotta wood frame.", year: "2024" },
+  { src: "/images/art-4.png", title: "Fluid Acrylic Pour", tag: "Mixed Media", desc: "Sage green and ivory swirled acrylic pour on 60×80cm canvas.", year: "2023" },
+  { src: "/images/art-5.png", title: "Macramé Wall Hanging", tag: "Fiber Art", desc: "100% natural cotton rope with dried pampas grass. Handknotted wall piece.", year: "2023" },
+  { src: "/images/art-6.png", title: "Ceramic Botanical Bowl", tag: "Ceramics", desc: "Hand-pinched stoneware with botanical imprint and sage green glaze.", year: "2023" },
+];
 
-  const filteredItems = currentCategory === "all" 
-    ? galleryItems 
-    : galleryItems.filter((item) => item.category === currentCategory);
+const tags = ["All", "Watercolor", "Paper Craft", "DIY Craft", "Mixed Media", "Fiber Art", "Ceramics"];
 
+export default function GalleryPage() {
   return (
-    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <div className="text-center mb-12">
-        <h1 className="font-serif text-4xl md:text-5xl font-medium text-charcoal mb-4">Portfolio Gallery</h1>
-        <p className="text-charcoal/70 max-w-2xl mx-auto">Explore a collection of my creative explorations, from watercolor landscapes to intricate paper crafts.</p>
-      </div>
+    <>
+      {/* Header */}
+      <section style={{
+        paddingTop: "160px",
+        paddingBottom: "80px",
+        paddingLeft: "48px",
+        paddingRight: "48px",
+        borderBottom: "1px solid rgba(26,22,18,0.08)",
+      }}>
+        <Reveal>
+          <p className="tag-pill" style={{ marginBottom: "20px", display: "inline-block" }}>Portfolio</p>
+          <h1 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(3rem, 7vw, 6rem)",
+            fontWeight: 300,
+            lineHeight: 1.05,
+            color: "var(--ink)",
+            marginBottom: "24px",
+          }}>
+            The Gallery
+          </h1>
+          <p style={{ color: "var(--muted)", fontSize: "1.05rem", maxWidth: "480px", lineHeight: 1.8 }}>
+            Every piece is an experiment in material, colour, and texture. Browse by medium or wander freely.
+          </p>
+        </Reveal>
 
-      {/* Filters */}
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
-        {categories.map((cat) => (
-          <Link
-            key={cat}
-            href={cat === "all" ? "/gallery" : `/gallery?category=${cat}`}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              currentCategory === cat
-                ? "bg-sage-600 text-white shadow-sm"
-                : "bg-white text-charcoal/70 border border-sage-200 hover:bg-sage-50 hover:text-charcoal"
-            }`}
-          >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </Link>
-        ))}
-      </div>
+        {/* Filter tags */}
+        <Reveal delay={0.2}>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "40px" }}>
+            {tags.map((tag) => (
+              <button
+                key={tag}
+                id={`filter-${tag.toLowerCase().replace(" ", "-")}`}
+                style={{
+                  padding: "8px 20px",
+                  borderRadius: "100px",
+                  border: tag === "All" ? "1px solid var(--rust)" : "1px solid rgba(26,22,18,0.15)",
+                  background: tag === "All" ? "var(--rust)" : "transparent",
+                  color: tag === "All" ? "var(--cream)" : "var(--muted)",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  cursor: "none",
+                  fontFamily: "inherit",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+      </section>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredItems.map((item) => (
-          <GalleryCard key={item.id} item={item} />
-        ))}
-      </div>
-
-      {filteredItems.length === 0 && (
-        <div className="text-center py-20 text-charcoal/60">
-          No items found for this category.
-        </div>
-      )}
-
-      {/* Basic Lightbox Modal (Server component placeholder - ideally we use a client component or parallel route for true lightbox, but intercepting routes are complex for v1 mock. We'll show a simple UI if ?item is present) */}
-      {params.item && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/80 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto shadow-2xl relative flex flex-col md:flex-row">
-            <Link href={`/gallery${currentCategory !== 'all' ? `?category=${currentCategory}` : ''}`} className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-white/80 rounded-full text-charcoal hover:bg-sage-100 transition-colors">
-              ✕
-            </Link>
-            
-            {(() => {
-              const item = galleryItems.find(i => i.slug === params.item);
-              if (!item) return <div className="p-12 text-center w-full">Item not found.</div>;
-              
-              return (
-                <>
-                  <div className="w-full md:w-3/5 bg-sage-50 min-h-[300px]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
-                      src={item.images[0]} 
-                      alt={item.title} 
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <div className="w-full md:w-2/5 p-8 md:p-10 flex flex-col">
-                    <span className="text-xs tracking-wider uppercase text-sage-600 mb-2">
-                      {item.category}
+      <section style={{ padding: "80px 48px", maxWidth: "1600px", margin: "0 auto" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+          gap: "32px",
+        }}>
+          {artworks.map((art, i) => (
+            <Reveal key={art.title} delay={i * 0.07} direction="scale">
+              <article
+                className="card-lift"
+                style={{
+                  background: "var(--cream-dark)",
+                  borderRadius: "20px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(26,22,18,0.06)",
+                  cursor: "none",
+                }}
+                aria-label={art.title}
+              >
+                <div className="img-reveal" style={{ aspectRatio: "4/3", position: "relative" }}>
+                  <Image
+                    src={art.src}
+                    alt={`${art.title} — ${art.tag} by Aqsa. ${art.desc}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  {/* Hover overlay */}
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: "rgba(26,22,18,0.6)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0,
+                    transition: "opacity 0.4s ease",
+                  }}
+                  className="gallery-overlay"
+                  >
+                    <span style={{
+                      padding: "12px 28px",
+                      border: "1px solid var(--cream)",
+                      borderRadius: "100px",
+                      color: "var(--cream)",
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                    }}>
+                      View Detail
                     </span>
-                    <h2 className="font-serif text-3xl font-medium text-charcoal mb-4">{item.title}</h2>
-                    
-                    <div className="mb-8">
-                      <h3 className="text-sm font-semibold text-charcoal mb-1">Materials</h3>
-                      <p className="text-charcoal/70">{item.materials}</p>
-                    </div>
-
-                    <div className="mb-8 flex-grow">
-                      <h3 className="text-sm font-semibold text-charcoal mb-1">Date Created</h3>
-                      <p className="text-charcoal/70">{new Date(item.dateCreated).toLocaleDateString()}</p>
-                    </div>
-
-                    {item.relatedVideoUrl && (
-                      <a 
-                        href={item.relatedVideoUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-full bg-sage-500 text-white py-3 rounded-md font-medium hover:bg-sage-600 transition-colors"
-                      >
-                        Watch Tutorial
-                      </a>
-                    )}
                   </div>
-                </>
-              );
-            })()}
-          </div>
+                </div>
+                <div style={{ padding: "24px 28px 28px" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
+                    <span className="tag-pill">{art.tag}</span>
+                    <span style={{ fontSize: "0.75rem", color: "var(--muted)" }}>{art.year}</span>
+                  </div>
+                  <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 400, color: "var(--ink)", marginBottom: "10px" }}>
+                    {art.title}
+                  </h2>
+                  <p style={{ fontSize: "0.83rem", color: "var(--muted)", lineHeight: 1.7 }}>{art.desc}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
-      )}
-    </main>
+      </section>
+
+      {/* CTA */}
+      <section style={{
+        padding: "80px 48px",
+        textAlign: "center",
+        borderTop: "1px solid rgba(26,22,18,0.08)",
+      }}>
+        <Reveal>
+          <p style={{ color: "var(--muted)", marginBottom: "20px" }}>Want to see the process behind each piece?</p>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mag-btn"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "16px 36px",
+              background: "var(--rust)",
+              color: "var(--cream)",
+              textDecoration: "none",
+              borderRadius: "100px",
+              fontSize: "0.78rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+              border: "1px solid var(--rust)",
+            }}
+          >
+            <span>Watch on YouTube →</span>
+          </a>
+        </Reveal>
+      </section>
+    </>
   );
 }

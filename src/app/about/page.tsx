@@ -1,100 +1,150 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/Reveal";
 
-export const metadata = {
-  title: "About | Aqsa Art & Craft",
-  description: "Learn more about Aqsa, her artistic journey, and her passion for teaching art and craft.",
+export const metadata: Metadata = {
+  title: "About",
+  description: "Get to know Aqsa — a self-taught artist and YouTube creator passionate about watercolor, paper crafts, and making art accessible to everyone.",
 };
 
 export default function AboutPage() {
   return (
-    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-        
-        {/* Images */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-4">
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-              <Image 
-                src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" 
-                alt="Aqsa's paints and brushes" 
-                fill 
-                className="object-cover"
-              />
-            </div>
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-              <Image 
-                src="https://images.unsplash.com/photo-1544158406-8d6bd1516eeb?q=80&w=800&auto=format&fit=crop" 
-                alt="Aqsa working in studio" 
-                fill 
-                className="object-cover"
-              />
-            </div>
+    <>
+      {/* Hero */}
+      <section style={{ paddingTop: "140px", paddingBottom: "80px", paddingLeft: "48px", paddingRight: "48px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }} className="grid-cols-1 md:grid-cols-2">
+          <div>
+            <Reveal>
+              <p className="tag-pill" style={{ marginBottom: "20px", display: "inline-block" }}>The Artist</p>
+              <h1 style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "clamp(3rem, 6vw, 5.5rem)",
+                fontWeight: 300,
+                lineHeight: 1.08,
+                color: "var(--ink)",
+                marginBottom: "32px",
+              }}>
+                Hello, I&apos;m<br />
+                <em style={{ color: "var(--rust)" }}>Aqsa.</em>
+              </h1>
+              <p style={{ color: "var(--muted)", lineHeight: 1.9, fontSize: "1rem", marginBottom: "20px" }}>
+                I was never the kid who took art classes. I was the one who filled notebook margins with little flowers and patterns, convinced that "real art" was for people with talent — a word I didn't think applied to me.
+              </p>
+              <p style={{ color: "var(--muted)", lineHeight: 1.9, fontSize: "1rem", marginBottom: "20px" }}>
+                The pandemic changed that. With time stretching endlessly and a set of cheap watercolors bought on impulse, I sat down at my kitchen table and painted my first peony. It was terrible. I loved it instantly.
+              </p>
+              <p style={{ color: "var(--muted)", lineHeight: 1.9, fontSize: "1rem", marginBottom: "40px" }}>
+                I started filming my practice sessions and posting them online. The response was overwhelming — not because my work was perfect, but because people were tired of perfection. They wanted to watch someone figure it out in real time. So that&apos;s exactly what I kept doing.
+              </p>
+              <Link
+                href="/contact"
+                className="mag-btn"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "16px 32px",
+                  background: "var(--rust)",
+                  color: "var(--cream)",
+                  textDecoration: "none",
+                  borderRadius: "100px",
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  fontWeight: 500,
+                  border: "1px solid var(--rust)",
+                }}
+              >
+                <span>Work With Me →</span>
+              </Link>
+            </Reveal>
           </div>
-          <div className="space-y-4 pt-12">
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-              <Image 
-                src="https://images.unsplash.com/photo-1518605368461-1e125222058c?q=80&w=800&auto=format&fit=crop" 
-                alt="Finished artwork" 
-                fill 
-                className="object-cover"
-              />
+          <Reveal direction="right">
+            <div style={{ position: "relative", paddingTop: "40px" }}>
+              <div style={{
+                position: "absolute", top: 0, right: "40px",
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "14rem", fontWeight: 300,
+                color: "var(--rust)", opacity: 0.06,
+                lineHeight: 1, pointerEvents: "none",
+                userSelect: "none",
+              }}>A</div>
+              <div className="img-reveal" style={{ borderRadius: "20px", overflow: "hidden", aspectRatio: "3/4", position: "relative" }}>
+                <Image
+                  src="/images/artist.png"
+                  alt="Aqsa in her art studio surrounded by paintings and creative supplies"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: "cover" }}
+                  priority
+                />
+              </div>
             </div>
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white bg-sage-100 flex items-center justify-center p-6 text-center">
-              <p className="font-serif text-2xl text-sage-800 italic">"Art is not what you see, but what you make others see."</p>
-            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Philosophy / Values */}
+      <section style={{ background: "var(--ink)", padding: "100px 48px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <Reveal>
+            <h2 style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "clamp(2rem, 4vw, 3.5rem)",
+              fontWeight: 300,
+              color: "var(--cream)",
+              marginBottom: "64px",
+              maxWidth: "600px",
+            }}>
+              What I believe about<br /><em style={{ color: "var(--rust-light)" }}>creativity</em>
+            </h2>
+          </Reveal>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "48px" }} className="grid-cols-1 md:grid-cols-3">
+            {[
+              { num: "01", title: "Everyone is creative", body: "Creativity is not a talent. It is a practice. It gets stronger every time you sit down, even when you don't feel like it." },
+              { num: "02", title: "Mistakes are the medium", body: "Some of my best pieces started as disasters. I treat every unexpected result as the art giving me new directions to explore." },
+              { num: "03", title: "Process over product", body: "The finished painting matters less than the hour you spent fully present in your body, mixing colors, following your instincts." },
+            ].map((item, i) => (
+              <Reveal key={item.num} delay={i * 0.1}>
+                <div style={{ borderTop: "1px solid rgba(245,240,232,0.1)", paddingTop: "32px" }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem", color: "var(--rust)", opacity: 0.4, marginBottom: "16px" }}>{item.num}</div>
+                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", color: "var(--cream)", fontWeight: 400, marginBottom: "16px" }}>{item.title}</h3>
+                  <p style={{ color: "rgba(245,240,232,0.5)", lineHeight: 1.8, fontSize: "0.9rem" }}>{item.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Content */}
-        <div className="flex flex-col justify-center">
-          <h1 className="font-serif text-4xl md:text-5xl font-medium text-charcoal mb-6">The Story Behind the Brush</h1>
-          
-          <div className="prose prose-sage prose-lg text-charcoal/80 mb-10">
-            <p>
-              Hi, I'm Aqsa. My journey with art began as a simple hobby—a way to find quiet amidst the noise of everyday life. What started as sketching in the margins of notebooks eventually bloomed into a deep love for watercolor, mixed media, and paper craft.
-            </p>
-            <p>
-              Over the years, I realized that the joy of creating is multiplied when shared. That's why I started my YouTube channel: to break down complex techniques into easy, approachable steps so that anyone, regardless of their skill level, can experience the magic of making something beautiful.
-            </p>
-            <p>
-              My style is heavily inspired by nature—the delicate structure of a petal, the shifting colors of a sunset, and the organic textures found in the world around us. I believe in using warm, inviting colors and materials that bring a sense of calm to the creative process.
-            </p>
-            <p>
-              When I'm not painting or filming tutorials, you can find me hunting for new art supplies, reading, or finding new ways to craft with everyday objects.
-            </p>
-          </div>
-
-          <div className="bg-sage-50 border border-sage-100 rounded-2xl p-8 mb-10">
-            <h3 className="font-serif text-2xl font-medium text-charcoal mb-4">Milestones & Community</h3>
-            <ul className="space-y-3 text-charcoal/70">
-              <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-sage-400" />
-                Over 100+ free tutorials published
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-sage-400" />
-                Featured in [Art/Craft Magazine Name]
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-sage-400" />
-                A growing community of creative minds worldwide
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="rounded-full" asChild>
-              <Link href="/contact">Get in Touch</Link>
-            </Button>
-            <Button variant="outline" size="lg" className="rounded-full" asChild>
-              <Link href="/gallery">View my portfolio</Link>
-            </Button>
-          </div>
+      {/* Milestones */}
+      <section style={{ padding: "100px 48px", maxWidth: "1200px", margin: "0 auto" }}>
+        <Reveal>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 300, color: "var(--ink)", marginBottom: "64px" }}>
+            The journey so far
+          </h2>
+        </Reveal>
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "absolute", left: "120px", top: 0, bottom: 0, width: "1px", background: "rgba(26,22,18,0.1)" }} className="hidden md:block" />
+          {[
+            { year: "2021", title: "First brushstroke", body: "Bought a cheap watercolor set during lockdown. Painted my first flower. Was hooked immediately." },
+            { year: "2022", title: "First upload", body: "Filmed and uploaded my first tutorial. 200 views felt like 2 million. I couldn't sleep from excitement." },
+            { year: "2023", title: "1,000 subscribers", body: "Hit my first milestone. Started diversifying into paper crafts, macramé, and mixed media." },
+            { year: "2024", title: "10K & growing", body: "The community grew beyond what I imagined. Collaborations with art supply brands. Studio set up properly." },
+          ].map((item, i) => (
+            <Reveal key={item.year} delay={i * 0.1} direction="left">
+              <div style={{ display: "flex", gap: "48px", marginBottom: "56px", alignItems: "flex-start" }}>
+                <div style={{ minWidth: "80px", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", color: "var(--rust)", fontWeight: 500, paddingTop: "4px" }}>{item.year}</div>
+                <div style={{ paddingLeft: "48px", borderLeft: "1px solid rgba(26,22,18,0.1)" }}>
+                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 400, color: "var(--ink)", marginBottom: "10px" }}>{item.title}</h3>
+                  <p style={{ color: "var(--muted)", lineHeight: 1.8, fontSize: "0.9rem" }}>{item.body}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
-        
-      </div>
-    </main>
+      </section>
+    </>
   );
 }

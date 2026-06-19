@@ -6,10 +6,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "img.youtube.com", // Also added this for the video thumbnails
       }
     ],
   },

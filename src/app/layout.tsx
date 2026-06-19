@@ -1,39 +1,47 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
+import { NavBar } from "@/components/layout/NavBar";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Aqsa | Art & Craft",
-  description: "Painting, craft, and DIY content by Aqsa.",
+  title: {
+    default: "Aqsa Art — Paintings, Crafts & DIY Tutorials",
+    template: "%s | Aqsa Art",
+  },
+  description:
+    "Explore Aqsa's world of watercolor paintings, paper crafts, and DIY art tutorials. Watch on YouTube, browse the gallery, and get inspired.",
+  keywords: ["art", "watercolor paintings", "DIY crafts", "paper art", "art tutorials", "Aqsa Art"],
+  authors: [{ name: "Aqsa" }],
+  creator: "Aqsa",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://aqsaart.com",
+    siteName: "Aqsa Art",
+    title: "Aqsa Art — Paintings, Crafts & DIY Tutorials",
+    description: "Explore Aqsa's world of watercolor paintings, paper crafts, and DIY art tutorials.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aqsa Art — Paintings, Crafts & DIY Tutorials",
+    description: "Explore Aqsa's world of watercolor paintings, paper crafts, and DIY art tutorials.",
+  },
+  robots: { index: true, follow: true },
+  metadataBase: new URL("https://aqsaart.com"),
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans text-foreground bg-background">
-        <Navbar />
-        <div className="flex-1 flex flex-col texture-bg">
-          {children}
-        </div>
+    <html lang="en" className="scroll-smooth">
+      <body className="grain antialiased">
+        <CustomCursor />
+        <NavBar />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
