@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "5 Beginner Watercolor Mistakes to Avoid",
+    "slug": "5-beginner-watercolor-mistakes-to-avoid",
+    "featuredImage": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop",
+    "excerpt": "Starting with watercolor can be daunting. Here are 5 common mistakes and how to avoid them for better paintings.",
+    "body": "Watercolor is a beautiful medium, but it requires patience and a good understanding of water control. \n\n## 1. Using the wrong paper\nAlways use watercolor paper (preferably 100% cotton) because regular paper will warp and pill.\n\n## 2. Too much water\nIt's called watercolor, but using too much water will lead to muddy colors and buckling paper.\n\n## 3. Overworking the paint\nLet the layers dry before adding more paint. Overworking leads to muddy colors.",
+    "publishDate": "2024-06-01T10:00:00Z",
+    "relatedGalleryItems": [1, 5],
+    "relatedVideoUrl": "https://youtube.com/watch?v=mock1"
+  },
+  {
+    "id": 2,
+    "title": "Easy DIY Paper Flower Tutorial for Beginners",
+    "slug": "easy-diy-paper-flower-tutorial-for-beginners",
+    "featuredImage": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=800&auto=format&fit=crop",
+    "excerpt": "Learn how to make beautiful crepe paper flowers that will last forever with this simple step-by-step guide.",
+    "body": "Paper flowers are a fantastic and inexpensive craft. \n\n## Materials Needed\n- Crepe paper\n- Floral wire\n- Floral tape\n- Scissors\n- Hot glue\n\n## Step 1: Cut the petals\nStart by cutting out petal shapes from your crepe paper. Make sure the grain runs vertically so you can stretch them.",
+    "publishDate": "2024-06-15T10:00:00Z",
+    "relatedGalleryItems": [2],
+    "relatedVideoUrl": null
+  }
+]

@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Custom colors */
+  --color-sage-50: #f4f7f4;
+  --color-sage-100: #e4ece5;
+  --color-sage-200: #c9d8cc;
+  --color-sage-300: #a4bca8;
+  --color-sage-400: #819e86;
+  --color-sage-500: #65846b;
+  --color-sage-600: #4f6954;
+  --color-sage-700: #415545;
+  --color-sage-800: #364639;
+  --color-sage-900: #2d3a30;
+
+  --color-cream: #faf9f6;
+  --color-charcoal: #2c2c2c;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-charcoal);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1c1a;
+    --foreground: #e4ece5;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Subtle paper texture */
+.texture-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 }
