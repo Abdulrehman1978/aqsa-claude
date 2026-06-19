@@ -6,6 +6,7 @@ import { TiltCard } from "@/components/ui/TiltCard";
 import { Hero3DWrapper } from "@/components/canvas/Hero3DWrapper";
 import { Gallery3DWrapper } from "@/components/canvas/Gallery3DWrapper";
 import { MorphBlobWrapper } from "@/components/canvas/MorphBlobWrapper";
+import { NewsletterForm } from "@/components/ui/NewsletterForm";
 
 export const metadata: Metadata = {
   title: "Aqsa Art — Paintings, Crafts & DIY Tutorials",
@@ -551,56 +552,7 @@ export default function Home() {
           <p style={{ color: "var(--muted)", fontSize: "1rem", maxWidth: "460px", margin: "0 auto 40px", lineHeight: 1.8 }}>
             Monthly newsletters with process notes, tutorials, and behind-the-scenes peeks at new work. No spam. Ever.
           </p>
-          <form
-            action="#"
-            style={{
-              display: "flex",
-              gap: "12px",
-              maxWidth: "480px",
-              margin: "0 auto",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-            aria-label="Email newsletter signup"
-          >
-            <input
-              type="email"
-              placeholder="your@email.com"
-              required
-              id="newsletter-email"
-              style={{
-                flex: 1,
-                minWidth: "220px",
-                padding: "16px 24px",
-                borderRadius: "100px",
-                border: "1px solid rgba(26,22,18,0.18)",
-                background: "var(--cream)",
-                fontSize: "0.9rem",
-                color: "var(--ink)",
-                outline: "none",
-                fontFamily: "inherit",
-              }}
-            />
-            <button
-              type="submit"
-              className="mag-btn"
-              style={{
-                padding: "16px 32px",
-                background: "var(--rust)",
-                color: "var(--cream)",
-                border: "1px solid var(--rust)",
-                borderRadius: "100px",
-                fontSize: "0.78rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                fontWeight: 500,
-                cursor: "none",
-                fontFamily: "inherit",
-              }}
-            >
-              <span>Subscribe</span>
-            </button>
-          </form>
+          <NewsletterForm />
         </Reveal>
       </section>
 
